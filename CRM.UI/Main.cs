@@ -14,13 +14,13 @@ namespace CRM.UI
             _db = new Context();
         }
 
-        private void productToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Product>(_db.Products));
+        private void productToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Product>(_db.Products, _db));
 
-        private void sellerToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Seller>(_db.Sellers));
+        private void sellerToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Seller>(_db.Sellers, _db));
 
-        private void customerToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Customer>(_db.Customers));
+        private void customerToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Customer>(_db.Customers, _db));
 
-        private void receiptToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Receipt>(_db.Receipts));
+        private void receiptToolStripMenuItem_Click(object sender, EventArgs e) => ShowCatalog(new Catalog<Receipt>(_db.Receipts, _db));
 
         private void ShowCatalog<T>(Catalog<T> catalog) where T : class
         {

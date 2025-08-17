@@ -12,14 +12,20 @@ namespace CRM.UI
             InitializeComponent();
         }
 
+        public ProductForm(Product product) : this()
+        {
+            Product = product;
+            textBoxName.Text = product.Name;
+            numericUpDownPrice.Value = product.Price;
+            numericUpDownCount.Value = product.Count;
+        }
+
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
-            Product = new Product 
-            {
-                Name = textBoxName.Text,
-                Price = numericUpDownPrice.Value,
-                Count = (int)numericUpDownCount.Value
-            };
+            var p = Product ?? new Product();
+            p.Name = textBoxName.Text;
+            p.Price = numericUpDownPrice.Value;
+            p.Count = (int)numericUpDownCount.Value;
 
             DialogResult = DialogResult.OK;
             Close();
