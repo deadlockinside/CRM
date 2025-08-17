@@ -53,7 +53,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dataGridView);
             this.Name = "Catalog";
-            this.Text = "Catalog";
+            this.Text = "Каталог";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
