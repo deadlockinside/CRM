@@ -15,5 +15,15 @@ namespace CRM.Kernel.Models
         public virtual ICollection<Sell> Sells { get; set; }
 
         public override string ToString() => Name;
+
+        public override int GetHashCode() => Id;
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Product product)
+                return Id.Equals(product.Id);
+
+            return false;
+        }
     }
 }
