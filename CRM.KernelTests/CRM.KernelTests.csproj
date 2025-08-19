@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Models\CartTests.cs" />
     <Compile Include="Models\CashDeskTests.cs" />
+    <Compile Include="Models\ShopComputerModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

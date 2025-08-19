@@ -56,10 +56,12 @@
     <Compile Include="Models\CashDesk.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Generator.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Receipt.cs" />
     <Compile Include="Models\Sell.cs" />
     <Compile Include="Models\Seller.cs" />
+    <Compile Include="Models\ShopComputerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,8 @@ namespace CRM.Kernel.Models
 
         public bool IsModel { get; set; }
 
+        public int Count => Queue.Count;
+
         public CashDesk(int number, Seller seller)
         {
             Number = number;
@@ -43,6 +45,10 @@ namespace CRM.Kernel.Models
         public decimal Dequeue() 
         {
             decimal sum = 0;
+
+            if (Queue.Count == 0)
+                return 0;
+
             var cart = Queue.Dequeue();
 
             if (cart != null) 
