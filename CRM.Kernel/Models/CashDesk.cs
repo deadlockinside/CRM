@@ -21,6 +21,8 @@ namespace CRM.Kernel.Models
 
         public int Count => Queue.Count;
 
+        public event EventHandler<Receipt> ReceiptClosed;
+
         public CashDesk(int number, Seller seller)
         {
             Number = number;
@@ -96,8 +98,12 @@ namespace CRM.Kernel.Models
                     }
                 }
 
+                receipt.Price = sum;
+
                 if (!IsModel)
                     _db.SaveChanges();
+
+                ReceiptClosed?.Invoke(this, receipt);
             }
 
             return sum;

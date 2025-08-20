@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CRM.Kernel.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace CRM.Kernel.Models.Tests
 {
@@ -16,6 +11,7 @@ namespace CRM.Kernel.Models.Tests
         {
             var model = new ShopComputerModel();
             model.Start();
+            Thread.Sleep(10000);
         }
     }
 }

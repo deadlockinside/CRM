@@ -19,6 +19,8 @@ namespace CRM.Kernel.Models
 
         public virtual ICollection<Sell> Sells { get; set; }
 
+        public decimal Price { get; set; }
+
         public override string ToString() => $"#{Id} от {CreatedAt.ToString("dd.MM.yy hh:mm:ss")}";
     }
 }
