@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CRM.Kernel.Models
 {
@@ -8,6 +10,7 @@ namespace CRM.Kernel.Models
     {
         Generator Generator = new Generator();
         Random Random = new Random();
+        bool isWorking = false;
 
         public List<CashDesk> CashDesks { get; set; } = new List<CashDesk>();
         public List<Cart> Carts { get; set; } = new List<Cart>();
@@ -21,44 +24,55 @@ namespace CRM.Kernel.Models
             Generator.GetNewProducts(1000);
             Generator.GetNewCustomers(100);
 
-            foreach (var seller in sellers) 
-            {
+            foreach (var seller in sellers)
                 Sellers.Enqueue(seller);
-            }
 
-            for (int i = 0; i < 3; i++) 
-            {
+            for (int i = 0; i < 3; i++)
                 CashDesks.Add(new CashDesk(CashDesks.Count, Sellers.Dequeue()));
-            }
         }
 
         public void Start()
         {
-            var customers = Generator.GetNewCustomers(10);
-            var carts = new Queue<Cart>();
+            isWorking = true;
+            Task.Run(() => CreateCarts(10, 1000));
 
-            foreach (var customer in customers) 
+            var cashdeskTasks = CashDesks.Select(c => new Task(() => CashDesksWork(c, 1000)));
+
+            foreach (var task in cashdeskTasks)
+                task.Start();
+        }
+
+        public void Stop() => isWorking = false;
+
+        private void CashDesksWork(CashDesk cashDesk, int sleep) 
+        {
+            while (isWorking)
             {
-                var cart = new Cart(customer);
+                if (CashDesks.Count > 0)
+                    cashDesk.Dequeue();
 
-                foreach(var product in Generator.GetRandomProducts(10, 30)) 
+                Thread.Sleep(sleep);
+            }
+        }
+
+        private void CreateCarts(int customersCount, int sleep) 
+        {
+            while (isWorking)
+            {
+                var customers = Generator.GetNewCustomers(customersCount);
+
+                foreach (var customer in customers)
                 {
-                    cart.Add(product);
+                    var cart = new Cart(customer);
+
+                    foreach (var product in Generator.GetRandomProducts(10, 30))
+                        cart.Add(product);
+
+                    var cash = CashDesks[Random.Next(CashDesks.Count - 1)];
+                    cash.Enqueue(cart);
                 }
 
-                carts.Enqueue(cart);
-            }
-
-            while (carts.Count > 0)
-            {
-                var cash = CashDesks[Random.Next(CashDesks.Count - 1)];
-                cash.Enqueue(carts.Dequeue());
-            }
-
-            while (true) 
-            {
-                var cash = CashDesks[Random.Next(CashDesks.Count - 1)];
-                var money = cash.Dequeue();
+                Thread.Sleep(sleep);
             }
         }
     }
