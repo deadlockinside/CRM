@@ -1,4 +1,5 @@
 ﻿using CRM.Kernel.Models;
+using System;
 using System.Windows.Forms;
 
 namespace CRM.UI
@@ -14,7 +15,7 @@ namespace CRM.UI
 
         public ProductForm(Product product) : this()
         {
-            Product = product;
+            Product = product ?? new Product();
             textBoxName.Text = product.Name;
             numericUpDownPrice.Value = product.Price;
             numericUpDownCount.Value = product.Count;
@@ -22,10 +23,10 @@ namespace CRM.UI
 
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
-            var p = Product ?? new Product();
-            p.Name = textBoxName.Text;
-            p.Price = numericUpDownPrice.Value;
-            p.Count = (int)numericUpDownCount.Value;
+            Product = Product ?? new Product();
+            Product.Name = textBoxName.Text;
+            Product.Price = numericUpDownPrice.Value;
+            Product.Count = Convert.ToInt32(numericUpDownCount.Value);
 
             DialogResult = DialogResult.OK;
             Close();

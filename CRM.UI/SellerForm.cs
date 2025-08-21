@@ -14,14 +14,14 @@ namespace CRM.UI
 
         public SellerForm(Seller seller) : this() 
         {
-            Seller = seller;
+            Seller = seller ?? new Seller();
             textBox.Text = seller.Name;
         } 
 
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
-            var s = Seller ?? new Seller();
-            s.Name = textBox.Text;
+            Seller = Seller ?? new Seller();
+            Seller.Name = textBox.Text;
             DialogResult = DialogResult.OK;
 
             Close();

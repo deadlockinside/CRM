@@ -30,6 +30,7 @@ namespace CRM.Kernel.Models
             Queue = new Queue<Cart>();
             IsModel = true;
             _db = new Context();
+            MaxQueueLength = 10;
         }
 
         public void Enqueue(Cart cart) 
@@ -108,5 +109,7 @@ namespace CRM.Kernel.Models
 
             return sum;
         }
+
+        public override string ToString() => $"Касса №{Number}";
     }
 }
