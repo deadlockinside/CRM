@@ -23,19 +23,19 @@ namespace CRM.Kernel.Models
 
         public event EventHandler<Receipt> ReceiptClosed;
 
-        public CashDesk(int number, Seller seller)
+        public CashDesk(int number, Seller seller, Context db)
         {
             Number = number;
             Seller = seller;
             Queue = new Queue<Cart>();
             IsModel = true;
-            _db = new Context();
+            _db = db ?? new Context();
             MaxQueueLength = 10;
         }
 
         public void Enqueue(Cart cart) 
         { 
-            if (Queue.Count <= MaxQueueLength) 
+            if (Queue.Count < MaxQueueLength) 
             {
                 Queue.Enqueue(cart);
             }
