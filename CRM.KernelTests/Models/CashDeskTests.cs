@@ -45,7 +45,7 @@ namespace CRM.Kernel.Models.Tests
 
             var cart1 = new Cart(customer1);
             var cart2 = new Cart(customer2);
-            var cashdesk = new CashDesk(1, seller);
+            var cashdesk = new CashDesk(1, seller, null);
             cashdesk.MaxQueueLength = 10;
 
             cart1.Add(product1);

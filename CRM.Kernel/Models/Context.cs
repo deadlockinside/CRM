@@ -4,7 +4,11 @@ namespace CRM.Kernel.Models
 {
     public class Context : DbContext
     {
-        public Context() : base ("CRMConnection") { }
+        public Context() : base ("CRMConnection") 
+        {
+            // я знаю, что так нельзя. Это временное решение для разработки!
+            Database.SetInitializer<Context>(null);
+        }
 
         public DbSet<Customer> Customers { get; set; }
 
@@ -15,5 +19,12 @@ namespace CRM.Kernel.Models
         public DbSet<Sell> Sells { get; set; }
 
         public DbSet<Seller> Sellers { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // Комментарий в конструкторе выше :)
+            Database.SetInitializer<Context>(null);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

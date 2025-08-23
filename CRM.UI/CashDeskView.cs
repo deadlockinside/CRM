@@ -1,5 +1,6 @@
 ﻿using CRM.Kernel.Models;
 using System;
+using System.Collections;
 using System.Windows.Forms;
 
 namespace CRM.UI
@@ -55,8 +56,8 @@ namespace CRM.UI
 
         private void CashDesk_ReceiptClosed(object sender, Receipt e)
         {
-            Price.Invoke((Action)delegate 
-            { 
+            Price.Invoke((Action)delegate
+            {
                 Price.Value += e.Price;
                 QueueLength.Value = CashDesk.Count;
                 LeaveCustomersCount.Text = $"Недождалось очереди: {CashDesk.ExitCustomer.ToString()}";

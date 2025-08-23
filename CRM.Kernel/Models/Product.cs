@@ -14,7 +14,7 @@ namespace CRM.Kernel.Models
 
         public virtual ICollection<Sell> Sells { get; set; }
 
-        public override string ToString() => Name;
+        public override string ToString() => $"{Name} - {Price}";
 
         public override int GetHashCode() => Id;
 

@@ -1,6 +1,7 @@
 ﻿using CRM.Kernel.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace CRM.UI
@@ -50,6 +51,11 @@ namespace CRM.UI
         private void CashDeskSpeed_ValueChanged(object sender, EventArgs e)
         {
             model.CashDeskSpeed = (int)CashDeskSpeed.Value;
+        }
+
+        private void ModelForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            model.Stop();
         }
     }
 }
